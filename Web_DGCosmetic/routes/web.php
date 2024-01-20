@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\AdminKategoriController;
+use App\Http\Controllers\AdminProductController;
+use App\Http\Controllers\AdminSupplierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,24 +18,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::get('/admin', function () {
     return view('admin.index');
 });
-Route::get('/admin/kategori', function () {
-    return view('admin.kategori');
-});
-Route::get('/admin/produk', function () {
-    return view('admin.produk');
-});
-Route::get('/admin/addProduk', function () {
-    return view('admin.addProduk');
-});
-Route::get('/admin/supplier', function () {
-    return view('admin.supplier');
-});
-Route::get('/admin/kasir', function () {
-    return view('admin.addKasir');
+Route::resource('/admin/kategori', AdminKategoriController::class);
+Route::resource('/admin/supplier', AdminSupplierController::class);
+Route::resource('/admin/kasir', AdminUserController::class);
+// Route::post('/admin/kategori', [AdminKategoriController::class, 'store']);
+Route::get('/admin/produk', [AdminProductController::class, 'index']);
+Route::get('/admin/addProduk', [AdminProductController::class, 'create']);
+
+Route::get('/kasir', function () {
+    return view('kasir.index');
 });

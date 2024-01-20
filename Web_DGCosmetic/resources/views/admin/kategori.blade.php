@@ -25,11 +25,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
                 </div>
                 <div class="modal-body">
-                    <form action="/register" method="post">
+                    <form action="/admin/kategori" method="post">
                         @csrf
                         <div class="form-group pt-4">
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="  Nama Kategori" required>
-                                @error('name')
+                            <input type="text" class="form-control @error('kategori') is-invalid @enderror" id="kategori" name="kategori" placeholder="  Nama Kategori" required>
+                                @error('kategori')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -64,24 +64,59 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($kategoris as $kategori)
                         <tr>
-                            <td>1</td>
-                            <td>Kosmetik</td>
-                            <td>15</td>
-                            <td>Hapus/Edit</td>
-                        </tr>    
-                        <tr>
-                            <td>2</td>
-                            <td>Skin Care</td>
-                            <td>40</td>
-                            <td>Hapus/Edit</td>
-                        </tr>    
-                        <tr>
-                            <td>3</td>
-                            <td>Body Care</td>
-                            <td>7</td>
-                            <td>Hapus/Edit</td>
-                        </tr>    
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $kategori->kategori }}</td>
+                            <td>belum</td>
+                            <td>
+                            <form action="/admin/kategori/{{ $kategori->id }}" method="post" class="d-inline">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger btn-circle btn-sm">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                                <button type="button" class="btn btn-warning btn-circle btn-sm" data-bs-toggle="modal" data-bs-target="#editModal">
+                                    <i class="fas fa-pencil"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <div class="modal fade" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Kategori</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/admin/kategori/{{ $kategori->id }}" method="post">
+                                        @csrf
+                                        @method('patch')
+                                        <div class="form-group pt-4">
+                                            <input type="text" class="form-control @error('kategori') is-invalid @enderror" id="kategori" name="kategori" placeholder="  Nama Kategori" value="{{ $kategori->kategori }}" required>
+                                                @error('kategori')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-success btn-icon-split">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-plus"></i>
+                                            </span>
+                                            <span class="text">Edit Kategori</span>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            </div>
+                        </div>  
+                        @endforeach   
                     </tbody>
                 </table>
             </div>

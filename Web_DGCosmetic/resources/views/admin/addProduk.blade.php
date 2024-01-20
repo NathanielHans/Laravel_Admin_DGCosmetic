@@ -6,7 +6,7 @@
         <h6 class="m-0 font-weight-bold text-primary text-lg">Tambah Produk</h6>
     </div>
     <div class="card-body border-left-primary">
-        <form action="/register" method="post">
+        <form action="/admin/addProduk" method="post">
             @csrf
             <div class="form-group pt-4">
                 <input type="text" class="form-control mb-2 @error('barcode') is-invalid @enderror" id="barcode" name="barcode" placeholder="Barcode" required>
@@ -29,9 +29,9 @@
                     </div>
                     <select class="custom-select @error('kategori_produk') is-invalid @enderror" id="kategori_produk" name="kategori_produk" required>
                         <option selected disabled>Pilih Kategori</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        @foreach ($kategoris as $kategori)
+                        <option value="{{ $kategori->id }}">{{ $kategori->kategori }}</option>
+                        @endforeach
                     </select>
                     @error('kategori_produk')
                         <div class="invalid-feedback">
@@ -67,9 +67,9 @@
                     </div>
                     <select class="custom-select @error('supplier_produk') is-invalid @enderror" id="supplier_produk" name="supplier_produk" required>
                         <option selected disabled>Pilih Supplier</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        @foreach ($suppliers as $supplier)
+                        <option value="{{ $supplier->id }}">{{ $supplier->supplier }}</option>
+                        @endforeach
                     </select>
                     @error('supplier_produk')
                         <div class="invalid-feedback">

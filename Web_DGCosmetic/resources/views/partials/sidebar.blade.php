@@ -47,6 +47,24 @@
     </li>
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
+    <li class="nav-item">
+        <a class="nav-link" href="/kasir/">
+        <i class="fa-solid fa-home"></i>
+            <span>Dashboard Kasir</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/admin/supplier">
+        <i class="fa-solid fa-archive"></i>
+            <span>Produk Toko</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/admin/supplier">
+        <i class="fa fa-money"></i>
+            <span>Transaksi Hari ini</span>
+        </a>
+    </li>
 
 
 </ul>
